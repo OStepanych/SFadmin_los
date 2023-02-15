@@ -1,0 +1,35 @@
+- hosts: zabbix_agent_ubuntu
+  become: yes
+  tasks:
+  - name: Install zabbix_agent on Ubuntu
+    apt:
+      name=zabbix-agent
+      state=latest
+  - name: Change zabbix_agentd.conf
+    template:
+      src: /etc/ansible/templates/zabbix-agent-ubuntu.conf
+      dest: /etc/zabbix/zabbix_agentd.conf
+      mode: 0777
+  - name: Zabbix-agent systemd
+    systemd:
+      name: zabbix-agent
+      enabled: yes
+      state: restarted
+
+- hosts: zabbix_agent_centos
+  become: yes
+  tasks:
+  - name: Install zabbix-agent on CentOS
+    yum:
+      name=zabbix-agent
+      state=latest
+  - name: Change zabbix_agentd.conf
+    template:
+      src: /etc/ansible/templates/zabbix-agent-centos.conf
+      dest: /etc/zabbix_agentd.conf
+      mode: 0777
+  - name: Zabbix-agent systemd
+    systemd:
+      name: zabbix-agent
+      enabled: yes
+      state: started

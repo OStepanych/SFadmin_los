@@ -1,0 +1,18 @@
+- hosts: all
+  become: yes
+  tasks:
+  - name: Install script for insert hostname and family_OS
+    template:
+      src: /etc/ansible/common/files/script_insert_hostname.sh
+      dest: /home/stepanych/script_insert_hostname.sh
+      mode: 0777
+  
+  - name: Insert data in text
+    lineinfile:
+      path: /home/stepanych/script_insert_hostname.sh
+      insertafter: EOF
+      line: "{{ item }}"
+      state: present
+    with_items:
+      - 'date &>> /var/log/web.log'
+      - 'nginx -t &>>/var/log/web.log'
