@@ -1,0 +1,29 @@
+- hosts: ubuntu
+  become: yes
+  tasks:
+  - name: Install redis on Ubuntu
+    apt:
+      name=redis
+      state=latest
+  - name: redis systemd
+    systemd:
+      name: redis-server.service
+      enabled: yes
+      state: started
+
+- hosts: centos
+  become: yes
+  tasks:
+  - name: install EPEL repo
+    yum:
+      name=epel-release
+      state=present
+  - name: Install redis on CentOS
+    yum:
+      name=redis
+      state=latest
+  - name: redis systemd
+    systemd:
+      name: redis.service
+      enabled: yes
+      state: started
