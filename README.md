@@ -1,5 +1,5 @@
-Рабочая ветка.
+Дочерняя ветка от develop.
 
 Список файлов:
 
-nginx.conf
+install_redis.yml, install_zabbix_agent.yml
