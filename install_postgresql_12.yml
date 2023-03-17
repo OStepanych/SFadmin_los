@@ -1,0 +1,17 @@
+- hosts: elk
+  become: yes
+  tasks:
+  - name: Install postgresql-12 on elk
+    apt:
+      name=postgresql
+      state=latest
+  - name: Install postgresql-contrib on elk
+    apt:
+      name=postgresql-contrib
+      state=latest
+  - name: postgresql-12 systemd
+    systemd:
+      name: postgresql
+      enabled: yes
+      state: started
+

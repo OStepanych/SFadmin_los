@@ -1,0 +1,8 @@
+- hosts: web
+  become: yes
+  tasks:
+  - name: Install php on web
+    apt:
+      name=php
+      state=latest
+
