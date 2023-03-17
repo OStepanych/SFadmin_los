@@ -1,13 +1,17 @@
 - hosts: clients
   become: yes
   tasks:
-  - name: Install zabbix_agent on clients
+  - name: Install zabbix_agent on Ubuntu
     apt:
       name=zabbix-agent
       state=latest
+  - name: Change zabbix_agentd.conf
+    template:
+      src: /etc/ansible/templates/zabbix-agent-ubuntu.conf
+      dest: /etc/zabbix/zabbix_agentd.conf
+      mode: 0777
   - name: Zabbix-agent systemd
     systemd:
       name: zabbix-agent
       enabled: yes
       state: started
-
