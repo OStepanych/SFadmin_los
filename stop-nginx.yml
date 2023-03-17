@@ -1,0 +1,7 @@
+---
+- hosts: centos.my
+  become: yes
+  tasks:
+  - name: Stop Service nginx
+    shell: systemctl stop nginx
+

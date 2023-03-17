@@ -1,0 +1,16 @@
+- hosts: web
+  become: yes
+  tasks:
+  - name: Copy installation file
+    ansible.builtin.copy:
+      src: /home/stepanych/filebeat-8.6.0-amd64.deb
+      dest: /home/stepanych/filebeat-8.6.0-amd64.deb
+      mode: '0777'
+  - name: Install filebeat on web
+    apt:
+      deb="/home/stepanych/filebeat-8.6.0-amd64.deb"
+  - name: filebeat systemd
+    systemd:
+      name: filebeat
+      enabled: yes
+      state: started

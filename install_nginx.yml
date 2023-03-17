@@ -1,0 +1,12 @@
+- hosts: web
+  become: yes
+  tasks:
+  - name: Install nginx on web
+    apt:
+      name=nginx
+      state=latest
+  - name: nginx systemd
+    systemd:
+      name: nginx
+      enabled: no
+      state: stopped

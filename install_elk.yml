@@ -1,0 +1,63 @@
+- hosts: test
+  become: yes
+  tasks:
+  - name: Install wget on elk
+    apt:
+      name=wget
+      state=latest
+  - name: Install apt-transport-https on elk
+    apt:
+      name=apt-transport-https
+      state=latest
+  - name: Install default-jdk on elk
+    apt:
+      name=default-jdk
+      state=latest
+  - name: Install uuid-runtime on elk
+    apt:
+      name=uuid-runtime
+      state=latest
+  - name: Install pwgen on elk
+    apt:
+      name=pwgen
+      state=latest
+  - name: Copy installation file elasticsearch
+    ansible.builtin.copy:
+      src: /home/stepanych/elk/elasticsearch-8.6.0-amd64.deb
+      dest: /home/stepanych/elasticsearch-8.6.0-amd64.deb
+      mode: '0777'
+  - name: Install elasticsearch on elk
+    apt:
+      deb="/home/stepanych/elasticsearch-8.6.0-amd64.deb"
+      #  - name: elasticsearch systemd
+      #    systemd:
+      #      name: elasticsearch
+      #      enabled: no
+      #      state: stopped
+  - name: Copy installation file logstash
+    ansible.builtin.copy:
+      src: /home/stepanych/elk/logstash-8.6.2-amd64.deb
+      dest: /home/stepanych/logstash-8.6.2-amd64.deb
+      mode: '0777'
+  - name: Install logstash on elk
+    apt:
+      deb="/home/stepanych/logstash-8.6.2-amd64.deb"
+  - name: logstash systemd
+    systemd:
+      name: logstash
+      enabled: yes
+      state: started
+  - name: Copy installation file kibana
+    ansible.builtin.copy:
+      src: /home/stepanych/elk/kibana-8.6.0-amd64.deb
+      dest: /home/stepanych/kibana-8.6.0-amd64.deb
+      mode: '0777'
+  - name: Install kibana on elk
+    apt:
+      deb="/home/stepanych/kibana-8.6.0-amd64.deb"
+  - name: kibana systemd
+    systemd:
+      name: kibana
+      enabled: yes
+      state: started
+

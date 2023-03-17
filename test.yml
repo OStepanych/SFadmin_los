@@ -1,0 +1,20 @@
+---
+- hosts: centos.my
+  become: yes
+  tasks:
+  - name: install EPEL repo
+    yum:
+      name=epel-release
+      state=present
+  - name: Install nginx on CentOS
+    yum:
+      name=nginx
+      state=latest
+    notify:
+      nginx systemd
+  handlers:
+  - name: nginx systemd
+    systemd:
+      name: nginx.service
+      enabled: yes
+      state: started

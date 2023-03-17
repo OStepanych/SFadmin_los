@@ -1,0 +1,17 @@
+- hosts: web
+  become: yes
+  tasks:
+  - name: Install bind9 on web
+    apt:
+      name=bind9
+      state=latest
+  - name: Install tools of monitoring
+    apt:
+      name=dnsutils
+      state=latest
+  - name: bind9 systemd
+    systemd:
+      name: bind9
+      enabled: yes
+      state: started
+

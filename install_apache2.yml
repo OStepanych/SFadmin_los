@@ -1,0 +1,13 @@
+- hosts: web
+  become: yes
+  tasks:
+  - name: Install apache2 on web
+    apt:
+      name=apache2
+      state=latest
+  - name: apache2 systemd
+    systemd:
+      name: apache2
+      enabled: no
+      state: stopped
+

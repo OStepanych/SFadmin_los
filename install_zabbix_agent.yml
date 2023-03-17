@@ -1,0 +1,13 @@
+- hosts: clients
+  become: yes
+  tasks:
+  - name: Install zabbix_agent on clients
+    apt:
+      name=zabbix-agent
+      state=latest
+  - name: Zabbix-agent systemd
+    systemd:
+      name: zabbix-agent
+      enabled: yes
+      state: started
+
