@@ -8,6 +8,7 @@ install_nginx.yml
 install_php.yml
 install_postgresql_12.yml
 install_zabbix_agent.yml
+
 Роли, незадействованные в Итоговом проекте:
 
 add_user.yml
