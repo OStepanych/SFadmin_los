@@ -1,7 +1,6 @@
 Роли, задействованные в Итоговом проекте:
 
 install_apache2.yml
-
 install_bind9.yml
 
 install_elk.yml
